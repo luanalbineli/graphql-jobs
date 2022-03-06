@@ -1,0 +1,21 @@
+type JobTag {
+    name: String!
+}
+
+type Company {
+    name: String!
+    websiteUrl: String!
+}
+
+type Job {
+    id: String!
+    title: String!
+    applyUrl: String!
+    locationNames: String
+    tags: [JobTag!]!
+    company: Company!
+}
+
+type Query {
+    jobs: [Job!]!
+}

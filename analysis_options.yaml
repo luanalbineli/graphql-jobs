@@ -1,0 +1,11 @@
+include: package:lint/analysis_options.yaml
+
+linter:
+  rules:
+    depend_on_referenced_packages: false
+
+analyzer:
+  exclude:
+    - lib/di/injection.config.dart
+    - lib/router/app_router.gr.dart
+    - lib/modules/**.g.dart

@@ -1,0 +1,14 @@
+query jobList {
+    jobs {
+        title
+        applyUrl
+        locationNames
+        tags {
+            name
+        }
+        company {
+            name
+            websiteUrl
+        }
+    }
+}
