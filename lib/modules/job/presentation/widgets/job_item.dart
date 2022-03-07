@@ -1,10 +1,12 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graphql_jobs/constants/app_colors.dart';
 import 'package:graphql_jobs/constants/app_dimens.dart';
-import 'package:graphql_jobs/constants/app_images.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
-import 'package:timeago/timeago.dart' as timeago;
+import 'package:graphql_jobs/modules/job/presentation/widgets/company_image.dart';
+import 'package:graphql_jobs/router/app_router.gr.dart';
+import 'package:timeago/timeago.dart' as time_ago;
 
 class JobItem extends StatelessWidget {
   final Job _job;
@@ -14,62 +16,31 @@ class JobItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(AppDimens.defaultMargin),
-        child: IntrinsicHeight(
-          child: Row(
-            children: [
-              _buildCompanyImage(context),
-              const SizedBox(width: AppDimens.defaultMargin),
-              _buildJobContent(context)
-            ],
+      child: InkWell(
+        onTap: () => _goToJobDetail(context),
+        child: Padding(
+          padding: const EdgeInsets.all(AppDimens.defaultMargin),
+          child: IntrinsicHeight(
+            child: Row(
+              children: [
+                CompanyImage(
+                  _job.company,
+                  size: AppDimens.jobListCompanyImageSize,
+                ),
+                const SizedBox(width: AppDimens.defaultMargin),
+                _buildJobContent(context)
+              ],
+            ),
           ),
         ),
       ),
     );
   }
-
-  Widget _buildCompanyImage(BuildContext context) {
-    final companyImageUrl =
-        AppImages.buildCompanyImageUrl(_job.company.websiteUrl);
-
-    final companyImagePlaceholder = _buildCompanyImagePlaceholder(context);
-
-    return CachedNetworkImage(
-      fit: BoxFit.cover,
-      imageUrl: companyImageUrl,
-      width: AppDimens.jobListCompanyImageSize,
-      height: AppDimens.jobListCompanyImageSize,
-      placeholder: (_, __) => companyImagePlaceholder,
-      errorWidget: (_, __, error) => companyImagePlaceholder,
-      imageBuilder: (context, imageProvider) => Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(AppDimens.jobListCompanyImageBorderRadius),
-          ),
-          image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCompanyImagePlaceholder(BuildContext context) => Container(
-        decoration: const BoxDecoration(
-          color: AppColors.wildSand,
-          borderRadius: BorderRadius.all(
-            Radius.circular(AppDimens.jobListCompanyImageBorderRadius),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            _job.company.name.characters.first.toUpperCase(),
-            style: Theme.of(context).textTheme.headlineLarge,
-          ),
-        ),
-      );
 
   Widget _buildJobContent(BuildContext context) {
+    final appLocalizations = AppLocalizations.of(context)!;
     final textTheme = Theme.of(context).textTheme;
+
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -92,14 +63,14 @@ class JobItem extends StatelessWidget {
               const Icon(
                 Icons.location_on,
                 color: AppColors.gray,
-                size: 14,
+                size: AppDimens.jobListLocationIconSize,
               ),
               const SizedBox(
                 width: AppDimens.defaultMargin025x,
               ),
               Expanded(
                 child: Text(
-                  _job.locationNames ?? '-',
+                  _job.locationNames ?? appLocalizations.jobLocationUnknown,
                   style: textTheme.caption,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -117,7 +88,11 @@ class JobItem extends StatelessWidget {
   }
 
   Widget _buildTimeAgoText(TextTheme textTheme) {
-    final timeAgoText = timeago.format(_job.createdAt);
+    final timeAgoText = time_ago.format(_job.createdAt);
     return Text(timeAgoText, style: textTheme.caption);
+  }
+
+  void _goToJobDetail(BuildContext context) {
+    context.router.push(JobDetailPageRoute(job: _job));
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_jobs/constants/app_dimens.dart';
 import 'package:graphql_jobs/modules/job/presentation/bloc/job_list_bloc.dart';
 import 'package:graphql_jobs/modules/job/presentation/widgets/job_item.dart';
+import 'package:graphql_jobs/modules/job/presentation/widgets/job_list_error.dart';
 import 'package:graphql_jobs/modules/job/presentation/widgets/job_list_loading.dart';
 
 class JobList extends StatelessWidget {
@@ -15,11 +16,11 @@ class JobList extends StatelessWidget {
         }
 
         if (state is JobListStateError) {
-          return _buildErrorState();
+          return const JobListError();
         }
 
         // Loading
-        return JobListLoading();
+        return const JobListLoading();
       },
     );
   }
@@ -33,9 +34,5 @@ class JobList extends StatelessWidget {
         height: AppDimens.defaultMargin,
       ),
     );
-  }
-
-  Widget _buildErrorState() {
-    return const Text('ERROR');
   }
 }

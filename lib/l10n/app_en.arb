@@ -1,4 +1,8 @@
 {
     "appName": "GraphQL Jobs",
-    "jobListTitle": "GraphQL Job List"
+    "jobListTitle": "GraphQL Job List",
+    "jobLocationUnknown": "Unknown",
+    "jobListErrorTitle": "Ops!",
+    "jobListErrorMessage": "We are having trouble to load the job list. Please, try again",
+    "jobListTryAgain": "Try again"
 }

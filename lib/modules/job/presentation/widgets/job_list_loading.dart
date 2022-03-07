@@ -3,6 +3,8 @@ import 'package:graphql_jobs/constants/app_dimens.dart';
 import 'package:graphql_jobs/modules/core/presentation/widgets/skeleton_effect.dart';
 
 class JobListLoading extends StatelessWidget {
+  const JobListLoading();
+
   @override
   Widget build(BuildContext context) {
     return SkeletonEffect(
