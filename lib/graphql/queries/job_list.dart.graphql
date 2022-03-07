@@ -4,6 +4,7 @@ query jobList {
         applyUrl
         locationNames
         createdAt
+        description
         tags {
             name
         }

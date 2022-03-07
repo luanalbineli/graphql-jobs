@@ -9,3 +9,5 @@ analyzer:
     - lib/di/injection.config.dart
     - lib/router/app_router.gr.dart
     - lib/modules/**.g.dart
+    - lib/graphql/api.graphql.dart
+    - lib/graphql/api.graphql.g.dart

@@ -18,8 +18,9 @@ class JobModel extends Job {
   const JobModel({
     required String title,
     required String applyUrl,
-    required String? locationNames,
+    String? locationNames,
     required DateTime createdAt,
+    required String description,
     required this.company,
     required this.tags,
   }) : super(
@@ -27,6 +28,7 @@ class JobModel extends Job {
           applyUrl: applyUrl,
           locationNames: locationNames,
           createdAt: createdAt,
+          description: description,
           company: company,
           tags: tags,
         );

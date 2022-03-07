@@ -4,5 +4,8 @@
     "jobLocationUnknown": "Unknown",
     "jobListErrorTitle": "Ops!",
     "jobListErrorMessage": "We are having trouble to load the job list. Please, try again",
-    "jobListTryAgain": "Try again"
+    "jobListTryAgain": "Try again",
+    "jobDetailTitle": "Job detail",
+    "jobDetailApplyNow": "Apply now",
+    "jobDetailErrorApplyNow": "We were unable to open the url. Check if you have a browser installed and try again"
 }

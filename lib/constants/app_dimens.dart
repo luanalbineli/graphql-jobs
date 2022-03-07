@@ -18,4 +18,7 @@ class AppDimens {
 
   // Job detail.
   static const double jobDetailCompanyImageSize = 84.0;
+  static const double jobDetailDotSize = 4.0;
+  static const double jobDetailApplyButtonHeight = 48.0;
+  static const double jobDetailTagItemSpacing = 14.0;
 }

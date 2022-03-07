@@ -6,13 +6,15 @@ class Job {
   final String applyUrl;
   final String? locationNames;
   final DateTime createdAt;
+  final String description;
   final Company company;
   final List<JobTag> tags;
 
   const Job({
     required this.title,
     required this.applyUrl,
-    required this.locationNames,
+    this.locationNames,
+    required this.description,
     required this.createdAt,
     required this.company,
     required this.tags,
