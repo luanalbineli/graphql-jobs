@@ -12,6 +12,7 @@ type Job {
     title: String!
     applyUrl: String!
     locationNames: String
+    createdAt: String!
     tags: [JobTag!]!
     company: Company!
 }

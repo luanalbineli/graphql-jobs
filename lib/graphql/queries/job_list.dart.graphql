@@ -3,6 +3,7 @@ query jobList {
         title
         applyUrl
         locationNames
+        createdAt
         tags {
             name
         }

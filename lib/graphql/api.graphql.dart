@@ -52,12 +52,15 @@ class JobList$Query$Job extends JsonSerializable with EquatableMixin {
 
   String? locationNames;
 
+  late String createdAt;
+
   late List<JobList$Query$Job$JobTag> tags;
 
   late JobList$Query$Job$Company company;
 
   @override
-  List<Object?> get props => [title, applyUrl, locationNames, tags, company];
+  List<Object?> get props =>
+      [title, applyUrl, locationNames, createdAt, tags, company];
   @override
   Map<String, dynamic> toJson() => _$JobList$Query$JobToJson(this);
 }
@@ -104,6 +107,12 @@ final JOB_LIST_QUERY_DOCUMENT = DocumentNode(definitions: [
                   selectionSet: null),
               FieldNode(
                   name: NameNode(value: 'locationNames'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
+                  name: NameNode(value: 'createdAt'),
                   alias: null,
                   arguments: [],
                   directives: [],

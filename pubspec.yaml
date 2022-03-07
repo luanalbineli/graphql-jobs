@@ -9,6 +9,7 @@ environment:
   sdk: ">=2.16.1 <3.0.0"
 
 dependencies:
+  auto_route: ^3.2.1
   cached_network_image: ^3.2.0
   flutter:
     sdk: flutter
@@ -21,9 +22,12 @@ dependencies:
   intl: ^0.17.0
   json_annotation: ^4.4.0
   shimmer: ^2.0.0
+  timeago: ^3.2.2
+  url_launcher: ^6.0.17
 
 dev_dependencies:
   artemis: '>=7.0.0 <8.0.0'
+  auto_route_generator: ^3.1.0
   build_runner: ^2.1.5
   flutter_lints: ^1.0.0
   flutter_test:

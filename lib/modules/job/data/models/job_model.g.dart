@@ -9,7 +9,8 @@ part of 'job_model.dart';
 JobModel _$JobModelFromJson(Map<String, dynamic> json) => JobModel(
       title: json['title'] as String,
       applyUrl: json['applyUrl'] as String,
-      locationName: json['locationName'] as String?,
+      locationNames: json['locationNames'] as String?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
       company: CompanyModel.fromJson(json['company'] as Map<String, dynamic>),
       tags: (json['tags'] as List<dynamic>)
           .map((e) => JobTagModel.fromJson(e as Map<String, dynamic>))
@@ -19,7 +20,8 @@ JobModel _$JobModelFromJson(Map<String, dynamic> json) => JobModel(
 Map<String, dynamic> _$JobModelToJson(JobModel instance) => <String, dynamic>{
       'title': instance.title,
       'applyUrl': instance.applyUrl,
-      'locationName': instance.locationName,
+      'locationNames': instance.locationNames,
+      'createdAt': instance.createdAt.toIso8601String(),
       'company': instance.company,
       'tags': instance.tags,
     };

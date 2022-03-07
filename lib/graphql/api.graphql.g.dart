@@ -35,6 +35,7 @@ JobList$Query$Job _$JobList$Query$JobFromJson(Map<String, dynamic> json) =>
       ..title = json['title'] as String
       ..applyUrl = json['applyUrl'] as String
       ..locationNames = json['locationNames'] as String?
+      ..createdAt = json['createdAt'] as String
       ..tags = (json['tags'] as List<dynamic>)
           .map((e) =>
               JobList$Query$Job$JobTag.fromJson(e as Map<String, dynamic>))
@@ -47,6 +48,7 @@ Map<String, dynamic> _$JobList$Query$JobToJson(JobList$Query$Job instance) =>
       'title': instance.title,
       'applyUrl': instance.applyUrl,
       'locationNames': instance.locationNames,
+      'createdAt': instance.createdAt,
       'tags': instance.tags.map((e) => e.toJson()).toList(),
       'company': instance.company.toJson(),
     };
