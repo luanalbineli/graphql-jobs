@@ -5,11 +5,13 @@ query jobList {
         locationNames
         createdAt
         description
+        slug
         tags {
             name
         }
         company {
             name
+            slug
             websiteUrl
         }
     }

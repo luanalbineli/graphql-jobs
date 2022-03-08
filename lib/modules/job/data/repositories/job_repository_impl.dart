@@ -1,5 +1,6 @@
 import 'package:graphql_jobs/modules/job/data/data_sources/job_local_data_source.dart';
 import 'package:graphql_jobs/modules/job/data/data_sources/job_remote_data_source.dart';
+import 'package:graphql_jobs/modules/job/data/models/job_favorite_key_model.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job_saved_key.dart';
 import 'package:graphql_jobs/modules/job/domain/repositories/job_repository.dart';
@@ -19,18 +20,24 @@ class JobRepositoryImpl extends JobRepository {
   Future<List<Job>> getJobList() => _jobRemoteDataSource.getJobList();
 
   @override
-  List<JobSavedKey> getFavoriteJobKeyList() =>
+  List<JobSavedKey> getJobSavedKeyList() =>
       _jobLocalDataSource.getSavedJobKeyList();
 
   @override
-  Future<void> addSavedJob(JobSavedKey jobSavedKey) {
-    // TODO: implement addSavedJob
-    throw UnimplementedError();
-  }
+  Future<void> addSavedJob(JobSavedKey jobSavedKey) =>
+      _jobLocalDataSource.addSavedJob(
+        JobSavedKeyModel(
+          jobSlug: jobSavedKey.jobSlug,
+          companySlug: jobSavedKey.companySlug,
+        ),
+      );
 
   @override
-  Future<void> removeSavedJob(JobSavedKey jobSavedKey) {
-    // TODO: implement removeSavedJob
-    throw UnimplementedError();
-  }
+  Future<void> removeSavedJob(JobSavedKey jobSavedKey) =>
+      _jobLocalDataSource.removeSavedJob(
+        JobSavedKeyModel(
+          jobSlug: jobSavedKey.jobSlug,
+          companySlug: jobSavedKey.companySlug,
+        ),
+      );
 }

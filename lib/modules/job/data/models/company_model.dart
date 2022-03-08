@@ -5,8 +5,15 @@ part 'company_model.g.dart';
 
 @JsonSerializable()
 class CompanyModel extends Company {
-  const CompanyModel({required String name, required String websiteUrl})
-      : super(name: name, websiteUrl: websiteUrl);
+  const CompanyModel({
+    required String name,
+    required String slug,
+    required String websiteUrl,
+  }) : super(
+          name: name,
+          slug: slug,
+          websiteUrl: websiteUrl,
+        );
 
   factory CompanyModel.fromJson(Map<String, dynamic> json) =>
       _$CompanyModelFromJson(json);

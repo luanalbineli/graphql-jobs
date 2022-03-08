@@ -21,6 +21,7 @@ class JobModel extends Job {
     String? locationNames,
     required DateTime createdAt,
     required String description,
+    required String slug,
     required this.company,
     required this.tags,
   }) : super(
@@ -29,6 +30,7 @@ class JobModel extends Job {
           locationNames: locationNames,
           createdAt: createdAt,
           description: description,
+          slug: slug,
           company: company,
           tags: tags,
         );

@@ -1,4 +1,5 @@
 import 'package:graphql_jobs/modules/job/domain/entities/company.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/job_saved_key.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job_tag.dart';
 
 class Job {
@@ -21,4 +22,9 @@ class Job {
     required this.company,
     required this.tags,
   });
+
+  JobSavedKey getJobSavedKey() => JobSavedKey(
+        jobSlug: slug,
+        companySlug: company.slug,
+      );
 }

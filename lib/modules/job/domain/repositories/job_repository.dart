@@ -6,7 +6,7 @@ abstract class JobRepository {
 
   Future<List<Job>> getJobList();
 
-  List<JobSavedKey> getFavoriteJobKeyList();
+  List<JobSavedKey> getJobSavedKeyList();
 
   Future<void> removeSavedJob(JobSavedKey jobSavedKey);
 

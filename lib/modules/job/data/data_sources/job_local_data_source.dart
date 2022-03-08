@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:graphql_jobs/extensions/string_extensions.dart';
 import 'package:graphql_jobs/modules/job/data/models/job_favorite_key_model.dart';
 import 'package:injectable/injectable.dart';
@@ -23,11 +24,11 @@ class JobLocalDataSourceImpl extends JobLocalDataSource {
 
   @override
   List<JobSavedKeyModel> getSavedJobKeyList() {
-    if (!_sharedPreferences.containsKey(_favoriteJobListKey)) {
+    if (!_sharedPreferences.containsKey(_savedJobKeyListKey)) {
       return [];
     }
 
-    final rawJSONList = _sharedPreferences.getString(_favoriteJobListKey);
+    final rawJSONList = _sharedPreferences.getString(_savedJobKeyListKey);
     if (rawJSONList.isNullOrEmpty) return [];
 
     final dynamicList = json.decode(rawJSONList!) as List<dynamic>;
@@ -36,12 +37,14 @@ class JobLocalDataSourceImpl extends JobLocalDataSource {
         .toList(growable: false);
   }
 
-  static const String _favoriteJobListKey = 'favorite_job_list';
+  static const String _savedJobKeyListKey = 'favorite_job_list';
 
   @override
   Future<void> addSavedJob(JobSavedKeyModel jobSavedKey) {
-    // TODO: implement addSavedJob
-    throw UnimplementedError();
+    final savedJobKeyList = getSavedJobKeyList();
+    savedJobKeyList.add(jobSavedKey);
+
+    return _saveJobKeyList(savedJobKeyList);
   }
 
   @override
@@ -52,5 +55,13 @@ class JobLocalDataSourceImpl extends JobLocalDataSource {
     return _saveJobKeyList(savedJobKeyList);
   }
 
-  Future<void> _saveJobKeyList(List<JobSavedKeyModel> jobSavedKeyList) {}
+  Future<void> _saveJobKeyList(List<JobSavedKeyModel> jobSavedKeyList) {
+    final jsonList = json.encode(
+      jobSavedKeyList
+          .map((element) => element.toJson())
+          .toList(growable: false),
+    );
+    debugPrint('jsonList: $jsonList');
+    return _sharedPreferences.setString(_savedJobKeyListKey, jsonList);
+  }
 }

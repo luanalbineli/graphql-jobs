@@ -31,10 +31,12 @@ class JobList$Query$Job$Company extends JsonSerializable with EquatableMixin {
 
   late String name;
 
+  late String slug;
+
   late String websiteUrl;
 
   @override
-  List<Object?> get props => [name, websiteUrl];
+  List<Object?> get props => [name, slug, websiteUrl];
   @override
   Map<String, dynamic> toJson() => _$JobList$Query$Job$CompanyToJson(this);
 }
@@ -56,13 +58,23 @@ class JobList$Query$Job extends JsonSerializable with EquatableMixin {
 
   late String description;
 
+  late String slug;
+
   late List<JobList$Query$Job$JobTag> tags;
 
   late JobList$Query$Job$Company company;
 
   @override
-  List<Object?> get props =>
-      [title, applyUrl, locationNames, createdAt, description, tags, company];
+  List<Object?> get props => [
+        title,
+        applyUrl,
+        locationNames,
+        createdAt,
+        description,
+        slug,
+        tags,
+        company
+      ];
   @override
   Map<String, dynamic> toJson() => _$JobList$Query$JobToJson(this);
 }
@@ -126,6 +138,12 @@ final JOB_LIST_QUERY_DOCUMENT = DocumentNode(definitions: [
                   directives: [],
                   selectionSet: null),
               FieldNode(
+                  name: NameNode(value: 'slug'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null),
+              FieldNode(
                   name: NameNode(value: 'tags'),
                   alias: null,
                   arguments: [],
@@ -146,6 +164,12 @@ final JOB_LIST_QUERY_DOCUMENT = DocumentNode(definitions: [
                   selectionSet: SelectionSetNode(selections: [
                     FieldNode(
                         name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null),
+                    FieldNode(
+                        name: NameNode(value: 'slug'),
                         alias: null,
                         arguments: [],
                         directives: [],

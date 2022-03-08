@@ -5,6 +5,7 @@ type JobTag {
 type Company {
     name: String!
     websiteUrl: String!
+    slug: String!
 }
 
 type Job {
@@ -14,6 +15,7 @@ type Job {
     locationNames: String
     createdAt: String!
     description: String!
+    slug: String!
     tags: [JobTag!]!
     company: Company!
 }

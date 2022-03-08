@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job_savedd.dart';
+import 'package:graphql_jobs/modules/job/presentation/bloc/save_job_bloc.dart';
 
 class SaveJobButton extends StatelessWidget {
   final Job _job;
@@ -19,5 +21,7 @@ class SaveJobButton extends StatelessWidget {
     );
   }
 
-  void _toggleJobSaved(BuildContext context) {}
+  void _toggleJobSaved(BuildContext context) {
+    BlocProvider.of<SaveJobBloc>(context).add(SaveJobEventToggle(job: _job));
+  }
 }
