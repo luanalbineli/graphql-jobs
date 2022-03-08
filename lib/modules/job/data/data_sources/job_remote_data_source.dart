@@ -10,10 +10,10 @@ abstract class JobRemoteDataSource {
 }
 
 @Injectable(as: JobRemoteDataSource)
-class EpisodeRemoteDataSourceImpl extends JobRemoteDataSource {
+class JobRemoteDataSourceImpl extends JobRemoteDataSource {
   final GraphQLClient _graphQLClient;
 
-  const EpisodeRemoteDataSourceImpl(this._graphQLClient);
+  const JobRemoteDataSourceImpl(this._graphQLClient);
 
   @override
   Future<List<JobModel>> getJobList() async {

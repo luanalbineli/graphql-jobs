@@ -7,6 +7,7 @@ class Job {
   final String? locationNames;
   final DateTime createdAt;
   final String description;
+  final String slug;
   final Company company;
   final List<JobTag> tags;
 
@@ -15,6 +16,7 @@ class Job {
     required this.applyUrl,
     this.locationNames,
     required this.description,
+    required this.slug,
     required this.createdAt,
     required this.company,
     required this.tags,

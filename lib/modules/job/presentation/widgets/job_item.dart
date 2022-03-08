@@ -5,6 +5,7 @@ import 'package:graphql_jobs/constants/app_colors.dart';
 import 'package:graphql_jobs/constants/app_dimens.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
 import 'package:graphql_jobs/modules/job/presentation/widgets/company_image.dart';
+import 'package:graphql_jobs/modules/job/presentation/widgets/save_job_button.dart';
 import 'package:graphql_jobs/router/app_router.gr.dart';
 import 'package:timeago/timeago.dart' as time_ago;
 
@@ -28,7 +29,7 @@ class JobItem extends StatelessWidget {
                   size: AppDimens.jobListCompanyImageSize,
                 ),
                 const SizedBox(width: AppDimens.defaultMargin),
-                _buildJobContent(context)
+                _buildJobContent(context),
               ],
             ),
           ),
@@ -45,16 +46,32 @@ class JobItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            _job.title,
-            style: textTheme.bodyLarge,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      _job.title,
+                      style: textTheme.bodyLarge,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(
+                      height: AppDimens.defaultMargin025x,
+                    ),
+                    Text(_job.company.name, style: textTheme.caption),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                width: AppDimens.defaultMargin025x,
+              ),
+              SaveJobButton(_job)
+            ],
           ),
-          const SizedBox(
-            height: AppDimens.defaultMargin025x,
-          ),
-          Text(_job.company.name, style: textTheme.caption),
           const SizedBox(
             height: AppDimens.defaultMargin2x,
           ),

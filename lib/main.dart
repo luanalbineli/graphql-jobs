@@ -4,8 +4,10 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graphql_jobs/di/injection.dart';
 import 'package:graphql_jobs/router/app_router.gr.dart';
 
-void main() {
-  configureDependencies();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await configureDependencies();
 
   runApp(MyApp());
 }
