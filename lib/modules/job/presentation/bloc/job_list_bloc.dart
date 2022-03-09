@@ -37,7 +37,11 @@ class JobListBloc extends Bloc<JobListEvent, JobListState> {
     if (result.isError || result.data == null) {
       state = JobListStateError(jobFilterType: event.jobFilterType);
     } else {
-      state = JobListStateLoaded(jobList: result.data!);
+      if (result.data!.isEmpty) {
+        state = JobListStateEmpty(jobFilterType: event.jobFilterType);
+      } else {
+        state = JobListStateLoaded(jobList: result.data!);
+      }
     }
 
     emit(state);

@@ -4,6 +4,7 @@ import 'package:graphql_jobs/constants/app_dimens.dart';
 import 'package:graphql_jobs/modules/job/presentation/bloc/job_list_bloc.dart';
 import 'package:graphql_jobs/modules/job/presentation/bloc/save_job_bloc.dart';
 import 'package:graphql_jobs/modules/job/presentation/widgets/job_item.dart';
+import 'package:graphql_jobs/modules/job/presentation/widgets/job_list_empty.dart';
 import 'package:graphql_jobs/modules/job/presentation/widgets/job_list_error.dart';
 import 'package:graphql_jobs/modules/job/presentation/widgets/job_list_loading.dart';
 
@@ -16,6 +17,10 @@ class JobList extends StatelessWidget {
         builder: (context, state) {
           if (state is JobListStateLoaded) {
             return _buildLoadedState(state);
+          }
+
+          if (state is JobListStateEmpty) {
+            return JobListEmpty(state.jobFilterType);
           }
 
           if (state is JobListStateError) {

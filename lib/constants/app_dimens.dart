@@ -12,6 +12,7 @@ class AppDimens {
   static const double jobListLoadingRowHeight = 14.0;
   static const double jobListLocationIconSize = 14.0;
   static const double jobListErrorIconSize = 64.0;
+  static const double jobListEmptyImage = 120.0;
 
   // Company image.
   static const double companyImageBorderRadius = 12.0;

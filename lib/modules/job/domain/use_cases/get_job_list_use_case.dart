@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:graphql_jobs/constants/app_constants.dart';
 import 'package:graphql_jobs/modules/core/domain/use_case/use_case.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job_filter_type.dart';
@@ -19,10 +20,10 @@ class GetJobListUseCaseImpl extends GetJobListUseCase {
 
   @override
   Future<List<Job>> execute(GetJobListParams params) async {
-    final jobList = await _jobRepository.getJobList();
     final savedJobKeyList = _jobRepository.getJobSavedKeyList();
 
     if (params.jobFilterType == JobFilterType.all) {
+      final jobList = await _jobRepository.getJobList();
       return _mapJobList(jobList, savedJobKeyList);
     }
 
@@ -32,7 +33,13 @@ class GetJobListUseCaseImpl extends GetJobListUseCase {
   List<Job> _mapJobList(List<Job> jobList, List<JobSavedKey> savedJobKeyList) {
     return jobList.map((job) {
       final jobSavedKey = job.getJobSavedKey();
-      if (savedJobKeyList.contains(jobSavedKey)) {
+      final savedKeyIndex = savedJobKeyList.indexWhere(
+        (key) =>
+            key.jobSlug == jobSavedKey.jobSlug &&
+            key.companySlug == jobSavedKey.companySlug,
+      );
+
+      if (savedKeyIndex != AppConstants.indexNotFound) {
         return JobSaved(job: job);
       }
 

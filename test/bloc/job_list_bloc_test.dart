@@ -1,5 +1,6 @@
 import 'package:faker/faker.dart' as faker;
 import 'package:graphql_jobs/modules/core/domain/use_case/use_case_result.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job_filter_type.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job_savedd.dart';
 import 'package:graphql_jobs/modules/job/domain/use_cases/get_job_list_use_case.dart';
@@ -25,7 +26,7 @@ void main() {
     bloc = JobListBloc(_getJobListUseCase, _updateJobListUseCase);
   });
 
-  test('Init test with with successful response', () async {
+  test('Init test with successful response', () async {
     const jobFilterType = JobFilterType.all;
 
     final expectedJobList = faker.faker.getJobList(4);
@@ -51,7 +52,7 @@ void main() {
     verify(() => _getJobListUseCase.call(params));
   });
 
-  test('Init test with with error response', () async {
+  test('Init test with error response', () async {
     const jobFilterType = JobFilterType.saved;
 
     const params = GetJobListParams(jobFilterType: jobFilterType);
@@ -130,5 +131,31 @@ void main() {
       emitsInOrder([]),
       reason: 'The state stream must be empty',
     );
+  });
+
+  test('Init test with empty successful response', () async {
+    const jobFilterType = JobFilterType.all;
+
+    final List<Job> expectedJobList = [];
+
+    const params = GetJobListParams(jobFilterType: jobFilterType);
+
+    when(() => _getJobListUseCase.call(params)).thenAnswer(
+      (invocation) =>
+          Future.value(UseCaseResult.success(data: expectedJobList)),
+    );
+
+    bloc.add(const JobListEventInit(jobFilterType: jobFilterType));
+
+    await expectLater(
+      bloc.stream,
+      emitsInOrder([
+        const JobListStateLoading(),
+        const JobListStateEmpty(jobFilterType: jobFilterType),
+      ]),
+      reason: 'Assert the state stream with loading + empty',
+    );
+
+    verify(() => _getJobListUseCase.call(params));
   });
 }

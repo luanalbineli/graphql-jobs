@@ -10,12 +10,15 @@ abstract class UpdateJobListUseCase
 }
 
 @Injectable(as: UpdateJobListUseCase)
-class UpdateJobListUseCaseImpl extends UseCase<List<Job>, UpdateJobListParams> {
+class UpdateJobListUseCaseImpl extends UpdateJobListUseCase {
   const UpdateJobListUseCaseImpl();
 
   @override
   List<Job> execute(UpdateJobListParams params) {
-    final jobIndex = params.jobList.indexOf(params.job);
+    final jobIndex = params.jobList.indexWhere(
+      (element) => element.slug == params.job.slug,
+    );
+
     if (jobIndex != AppConstants.indexNotFound) {
       final newJobList = [...params.jobList];
       newJobList[jobIndex] = params.job;

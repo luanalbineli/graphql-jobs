@@ -1,7 +1,7 @@
 class AppImages {
   AppImages._();
 
-  // Image assets path...
+  static const icEmptyFileGray = 'assets/images/ic_empty_file_gray.svg';
 
   static String buildCompanyImageUrl(String companyWebsiteUrl) =>
       'https://logo.clearbit.com/$companyWebsiteUrl?size=$_defaultCompanyImageSize';

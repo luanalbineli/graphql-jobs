@@ -37,7 +37,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   await gh.factoryAsync<_i7.SharedPreferences>(
       () => mainModule.sharedPreferences,
       preResolve: true);
-  gh.factory<_i8.UpdateJobListUseCase>(() => _i8.UpdateJobListUseCase());
+  gh.factory<_i8.UpdateJobListUseCase>(() => _i8.UpdateJobListUseCaseImpl());
   gh.factory<_i9.JobLocalDataSource>(
       () => _i9.JobLocalDataSourceImpl(get<_i7.SharedPreferences>()));
   gh.factory<_i10.JobRepository>(() => _i11.JobRepositoryImpl(
@@ -45,7 +45,7 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
   gh.factory<_i12.ToggleJobSavedUseCase>(
       () => _i12.ToggleJobSavedUseCase(get<_i10.JobRepository>()));
   gh.factory<_i13.GetJobListUseCase>(
-      () => _i13.GetJobListUseCase(get<_i10.JobRepository>()));
+      () => _i13.GetJobListUseCaseImpl(get<_i10.JobRepository>()));
   gh.factory<_i14.JobListBloc>(() => _i14.JobListBloc(
       get<_i13.GetJobListUseCase>(), get<_i8.UpdateJobListUseCase>()));
   gh.factory<_i15.SaveJobBloc>(

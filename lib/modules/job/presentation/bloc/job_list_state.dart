@@ -28,3 +28,12 @@ class JobListStateError extends JobListState {
   @override
   List<Object?> get props => [jobFilterType];
 }
+
+class JobListStateEmpty extends JobListState {
+  final JobFilterType jobFilterType;
+
+  const JobListStateEmpty({required this.jobFilterType});
+
+  @override
+  List<Object?> get props => [jobFilterType];
+}

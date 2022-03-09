@@ -5,19 +5,19 @@ import 'package:graphql_jobs/modules/job/domain/entities/job_tag.dart';
 
 extension FakerExtensions on faker.Faker {
   Job getJob() => Job(
-        title: faker.faker.job.title(),
-        applyUrl: faker.faker.internet.httpsUrl(),
+        title: job.title(),
+        applyUrl: internet.httpsUrl(),
         company: Company(
-          name: faker.faker.company.name(),
-          slug: faker.faker.company.suffix(),
-          websiteUrl: faker.faker.internet.httpsUrl(),
+          name: company.name(),
+          slug: guid.guid(),
+          websiteUrl: internet.httpsUrl(),
         ),
-        slug: faker.faker.job.random.toString(),
-        createdAt: faker.faker.date.dateTime(),
-        description: faker.faker.lorem.sentence(),
+        slug: guid.guid(),
+        createdAt: date.dateTime(),
+        description: lorem.sentence(),
         tags: List.generate(
-          faker.faker.randomGenerator.integer(6, min: 1),
-          (index) => JobTag(name: faker.faker.lorem.word()),
+          randomGenerator.integer(6, min: 1),
+          (index) => JobTag(name: lorem.word()),
         ),
       );
 
