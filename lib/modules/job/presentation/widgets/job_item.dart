@@ -69,7 +69,11 @@ class JobItem extends StatelessWidget {
               const SizedBox(
                 width: AppDimens.defaultMargin025x,
               ),
-              SaveJobButton(_job)
+              SaveJobButton(
+                _job,
+                padding: EdgeInsets.zero,
+                constraints: const BoxConstraints(),
+              )
             ],
           ),
           const SizedBox(
