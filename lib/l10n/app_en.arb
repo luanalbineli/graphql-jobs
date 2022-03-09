@@ -1,15 +1,17 @@
 {
     "appName": "GraphQL Jobs",
-    "jobListTitle": "GraphQL Job List",
+    "jobListTitle": "Job list",
     "jobLocationUnknown": "Unknown",
     "jobListErrorTitle": "Ops!",
     "jobListErrorMessage": "We are having trouble to load the job list. Please, try again",
     "jobListTryAgain": "Try again",
+    "jobListSaved": "Saved",
     "jobDetailTitle": "Job detail",
     "jobDetailApplyNow": "Apply now",
     "jobDetailErrorApplyNow": "We were unable to open the url. Check if you have a browser installed and try again",
     "jobAddedSavedListSuccessMessage": "Job added to saved list",
     "jobRemovedSavedListSuccessMessage": "Job removed to saved list",
     "jobOutSavedListErrorMessage": "An error occurred while tried to add to saved list. Please, try again",
-    "jobInSavedListErrorMessage": "An error occurred while tried to remove from saved list. Please, try again"
+    "jobInSavedListErrorMessage": "An error occurred while tried to remove from saved list. Please, try again",
+    "jobSavedListTitle": "Saved job list"
 }

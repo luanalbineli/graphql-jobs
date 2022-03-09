@@ -3,6 +3,7 @@ import 'package:graphql_jobs/modules/job/data/data_sources/job_remote_data_sourc
 import 'package:graphql_jobs/modules/job/data/models/job_favorite_key_model.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job_saved_key.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/job_savedd.dart';
 import 'package:graphql_jobs/modules/job/domain/repositories/job_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -35,6 +36,15 @@ class JobRepositoryImpl extends JobRepository {
   @override
   Future<void> removeSavedJob(JobSavedKey jobSavedKey) =>
       _jobLocalDataSource.removeSavedJob(
+        JobSavedKeyModel(
+          jobSlug: jobSavedKey.jobSlug,
+          companySlug: jobSavedKey.companySlug,
+        ),
+      );
+
+  @override
+  Future<JobSaved> getSavedJob(JobSavedKey jobSavedKey) =>
+      _jobRemoteDataSource.getJobSaved(
         JobSavedKeyModel(
           jobSlug: jobSavedKey.jobSlug,
           companySlug: jobSavedKey.companySlug,

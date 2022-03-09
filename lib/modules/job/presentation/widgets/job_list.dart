@@ -19,7 +19,7 @@ class JobList extends StatelessWidget {
           }
 
           if (state is JobListStateError) {
-            return const JobListError();
+            return JobListError(state.jobFilterType);
           }
 
           // Loading

@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:graphql_jobs/constants/app_colors.dart';
 import 'package:graphql_jobs/constants/app_dimens.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/job_filter_type.dart';
 import 'package:graphql_jobs/modules/job/presentation/bloc/job_list_bloc.dart';
 
 class JobListError extends StatelessWidget {
-  const JobListError();
+  final JobFilterType _jobFilterType;
+  const JobListError(this._jobFilterType);
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,7 @@ class JobListError extends StatelessWidget {
   }
 
   void _tryLoadJobListAgain(BuildContext context) {
-    BlocProvider.of<JobListBloc>(context).add(const JobListEventInit());
+    BlocProvider.of<JobListBloc>(context)
+        .add(JobListEventInit(jobFilterType: _jobFilterType));
   }
 }

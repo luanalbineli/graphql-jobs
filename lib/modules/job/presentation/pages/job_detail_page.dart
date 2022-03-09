@@ -29,6 +29,8 @@ class JobDetailPage extends StatelessWidget {
             title: Text(appLocalizations.jobDetailTitle),
             actions: [_buildSaveJobAction()],
           ),
+          // I didn't wrap the entire widget into a BlocBuilder,
+          // because only the action need to be updated when the job entity changes.
           body: JobDetail(_job),
         ),
       ),

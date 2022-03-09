@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:graphql_jobs/modules/core/domain/use_case/use_case.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/job_filter_type.dart';
 import 'package:graphql_jobs/modules/job/domain/use_cases/get_job_list_use_case.dart';
 import 'package:graphql_jobs/modules/job/domain/use_cases/update_job_list_use_case.dart';
 import 'package:injectable/injectable.dart';
@@ -29,11 +29,12 @@ class JobListBloc extends Bloc<JobListEvent, JobListState> {
   ) async {
     emit(const JobListStateLoading());
 
-    final result = await _getJobListUseCase.call(NoParams.instance);
+    final params = GetJobListParams(jobFilterType: event.jobFilterType);
+    final result = await _getJobListUseCase.call(params);
 
     final JobListState state;
     if (result.isError || result.data == null) {
-      state = const JobListStateError();
+      state = JobListStateError(jobFilterType: event.jobFilterType);
     } else {
       state = JobListStateLoaded(jobList: result.data!);
     }

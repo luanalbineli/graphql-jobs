@@ -1,0 +1,18 @@
+query job($input: JobInput!) {
+    job(input:$input) {
+        title
+        applyUrl
+        locationNames
+        createdAt
+        description
+        slug
+        tags {
+            name
+        }
+        company {
+            name
+            slug
+            websiteUrl
+        }
+    }
+}#

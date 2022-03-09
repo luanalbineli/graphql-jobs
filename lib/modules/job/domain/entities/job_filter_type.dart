@@ -1,0 +1,1 @@
+enum JobFilterType { all, saved }

@@ -5,7 +5,8 @@ abstract class JobListEvent {
 }
 
 class JobListEventInit extends JobListEvent {
-  const JobListEventInit();
+  final JobFilterType jobFilterType;
+  const JobListEventInit({required this.jobFilterType});
 }
 
 class JobListEventUpdateJob extends JobListEvent {

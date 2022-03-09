@@ -20,6 +20,12 @@ type Job {
     company: Company!
 }
 
+input JobInput {
+    jobSlug: String!
+    companySlug: String!
+}
+
 type Query {
     jobs: [Job!]!
+    job: Job!
 }

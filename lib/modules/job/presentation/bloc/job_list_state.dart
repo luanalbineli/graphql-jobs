@@ -15,5 +15,7 @@ class JobListStateLoaded extends JobListState {
 }
 
 class JobListStateError extends JobListState {
-  const JobListStateError();
+  final JobFilterType jobFilterType;
+
+  const JobListStateError({required this.jobFilterType});
 }
