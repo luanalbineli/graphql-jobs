@@ -1,6 +1,24 @@
 import 'package:flutter/foundation.dart';
 import 'package:graphql_jobs/modules/core/domain/use_case/use_case_result.dart';
 
+abstract class UseCase<TResult, TParams> {
+  const UseCase();
+
+  @nonVirtual
+  UseCaseResult<TResult> call(TParams params) {
+    try {
+      final result = execute(params);
+      return UseCaseResult.success(data: result);
+    } catch (exception, stacktrace) {
+      // Proper error handling, like Crashlytics and stuff.
+      debugPrint('An error occurred: $exception - $stacktrace');
+      return UseCaseResult.error(exception: exception);
+    }
+  }
+
+  TResult execute(TParams params);
+}
+
 abstract class AsyncUseCase<TResult, TParams> {
   const AsyncUseCase();
 

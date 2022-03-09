@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_jobs/constants/app_dimens.dart';
 import 'package:graphql_jobs/modules/job/presentation/bloc/job_list_bloc.dart';
+import 'package:graphql_jobs/modules/job/presentation/bloc/save_job_bloc.dart';
 import 'package:graphql_jobs/modules/job/presentation/widgets/job_item.dart';
 import 'package:graphql_jobs/modules/job/presentation/widgets/job_list_error.dart';
 import 'package:graphql_jobs/modules/job/presentation/widgets/job_list_loading.dart';
@@ -9,19 +10,22 @@ import 'package:graphql_jobs/modules/job/presentation/widgets/job_list_loading.d
 class JobList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<JobListBloc, JobListState>(
-      builder: (context, state) {
-        if (state is JobListStateLoaded) {
-          return _buildLoadedState(state);
-        }
+    return BlocListener<SaveJobBloc, SaveJobState>(
+      listener: _handleSaveJobChanges,
+      child: BlocBuilder<JobListBloc, JobListState>(
+        builder: (context, state) {
+          if (state is JobListStateLoaded) {
+            return _buildLoadedState(state);
+          }
 
-        if (state is JobListStateError) {
-          return const JobListError();
-        }
+          if (state is JobListStateError) {
+            return const JobListError();
+          }
 
-        // Loading
-        return const JobListLoading();
-      },
+          // Loading
+          return const JobListLoading();
+        },
+      ),
     );
   }
 
@@ -34,5 +38,12 @@ class JobList extends StatelessWidget {
         height: AppDimens.defaultMargin,
       ),
     );
+  }
+
+  void _handleSaveJobChanges(BuildContext context, SaveJobState state) {
+    if (state is SaveJobStateChange) {
+      BlocProvider.of<JobListBloc>(context)
+          .add(JobListEventUpdateJob(job: state.job));
+    }
   }
 }

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
-import 'package:graphql_jobs/modules/job/domain/use_cases/toggle_job_saved.dart';
+import 'package:graphql_jobs/modules/job/domain/use_cases/toggle_job_saved_use_case.dart';
 import 'package:injectable/injectable.dart';
 
 part 'save_job_event.dart';
@@ -27,7 +27,7 @@ class SaveJobBloc extends Bloc<SaveJobEvent, SaveJobState> {
     if (result.isSuccess) {
       state = SaveJobStateChange(job: result.data!);
     } else {
-      state = const SaveJobStateError();
+      state = SaveJobStateError(job: event.job);
     }
 
     emit(state);

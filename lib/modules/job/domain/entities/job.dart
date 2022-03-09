@@ -27,4 +27,10 @@ class Job {
         jobSlug: slug,
         companySlug: company.slug,
       );
+
+  @override
+  bool operator ==(Object other) => other is Job && slug == other.slug;
+
+  @override
+  int get hashCode => slug.hashCode;
 }

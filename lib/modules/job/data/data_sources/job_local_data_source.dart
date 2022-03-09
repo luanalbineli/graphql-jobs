@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:graphql_jobs/extensions/string_extensions.dart';
 import 'package:graphql_jobs/modules/job/data/models/job_favorite_key_model.dart';
 import 'package:injectable/injectable.dart';
@@ -34,7 +33,7 @@ class JobLocalDataSourceImpl extends JobLocalDataSource {
     final dynamicList = json.decode(rawJSONList!) as List<dynamic>;
     return dynamicList
         .map((map) => JobSavedKeyModel.fromJson(map as Map<String, dynamic>))
-        .toList(growable: false);
+        .toList();
   }
 
   static const String _savedJobKeyListKey = 'favorite_job_list';
@@ -61,7 +60,6 @@ class JobLocalDataSourceImpl extends JobLocalDataSource {
           .map((element) => element.toJson())
           .toList(growable: false),
     );
-    debugPrint('jsonList: $jsonList');
     return _sharedPreferences.setString(_savedJobKeyListKey, jsonList);
   }
 }

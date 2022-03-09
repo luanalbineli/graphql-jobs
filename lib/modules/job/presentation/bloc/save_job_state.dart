@@ -14,5 +14,6 @@ class SaveJobStateChange extends SaveJobState {
 }
 
 class SaveJobStateError extends SaveJobState {
-  const SaveJobStateError();
+  final Job job;
+  const SaveJobStateError({required this.job});
 }
