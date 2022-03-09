@@ -6,10 +6,15 @@ import 'package:graphql_jobs/modules/job/domain/entities/job_savedd.dart';
 import 'package:graphql_jobs/modules/job/domain/repositories/job_repository.dart';
 import 'package:injectable/injectable.dart';
 
-@injectable
-class GetJobListUseCase extends AsyncUseCase<List<Job>, GetJobListParams> {
+abstract class GetJobListUseCase
+    extends AsyncUseCase<List<Job>, GetJobListParams> {
+  const GetJobListUseCase();
+}
+
+@Injectable(as: GetJobListUseCase)
+class GetJobListUseCaseImpl extends GetJobListUseCase {
   final JobRepository _jobRepository;
-  const GetJobListUseCase(this._jobRepository);
+  const GetJobListUseCaseImpl(this._jobRepository);
 
   @override
   Future<List<Job>> execute(GetJobListParams params) async {

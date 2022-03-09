@@ -4,8 +4,15 @@ import 'package:graphql_jobs/modules/core/domain/use_case/use_case.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
 import 'package:injectable/injectable.dart';
 
-@injectable
-class UpdateJobListUseCase extends UseCase<List<Job>, UpdateJobListParams> {
+abstract class UpdateJobListUseCase
+    extends UseCase<List<Job>, UpdateJobListParams> {
+  const UpdateJobListUseCase();
+}
+
+@Injectable(as: UpdateJobListUseCase)
+class UpdateJobListUseCaseImpl extends UseCase<List<Job>, UpdateJobListParams> {
+  const UpdateJobListUseCaseImpl();
+
   @override
   List<Job> execute(UpdateJobListParams params) {
     final jobIndex = params.jobList.indexOf(params.job);
