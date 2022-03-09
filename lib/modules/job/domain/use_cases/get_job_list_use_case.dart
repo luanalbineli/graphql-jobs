@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:graphql_jobs/modules/core/domain/use_case/use_case.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job_filter_type.dart';
@@ -48,7 +49,10 @@ class GetJobListUseCaseImpl extends GetJobListUseCase {
   }
 }
 
-class GetJobListParams {
+class GetJobListParams extends Equatable {
   final JobFilterType jobFilterType;
   const GetJobListParams({required this.jobFilterType});
+
+  @override
+  List<Object?> get props => [jobFilterType];
 }

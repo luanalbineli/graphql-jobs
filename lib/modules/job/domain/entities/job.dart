@@ -1,8 +1,9 @@
+import 'package:equatable/equatable.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/company.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job_saved_key.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job_tag.dart';
 
-class Job {
+class Job extends Equatable {
   final String title;
   final String applyUrl;
   final String? locationNames;
@@ -28,9 +29,12 @@ class Job {
         companySlug: company.slug,
       );
 
-  @override
+  /*@override
   bool operator ==(Object other) => other is Job && slug == other.slug;
 
   @override
-  int get hashCode => slug.hashCode;
+  int get hashCode => slug.hashCode;*/
+
+  @override
+  List<Object?> get props => [slug];
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:equatable/equatable.dart';
 import 'package:graphql_jobs/constants/app_constants.dart';
 import 'package:graphql_jobs/modules/core/domain/use_case/use_case.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
@@ -16,7 +16,6 @@ class UpdateJobListUseCaseImpl extends UseCase<List<Job>, UpdateJobListParams> {
   @override
   List<Job> execute(UpdateJobListParams params) {
     final jobIndex = params.jobList.indexOf(params.job);
-    debugPrint('jobIndex: $jobIndex');
     if (jobIndex != AppConstants.indexNotFound) {
       final newJobList = [...params.jobList];
       newJobList[jobIndex] = params.job;
@@ -27,12 +26,15 @@ class UpdateJobListUseCaseImpl extends UseCase<List<Job>, UpdateJobListParams> {
   }
 }
 
-class UpdateJobListParams {
+class UpdateJobListParams extends Equatable {
   final List<Job> jobList;
   final Job job;
 
-  UpdateJobListParams({
+  const UpdateJobListParams({
     required this.jobList,
     required this.job,
   });
+
+  @override
+  List<Object?> get props => [jobList, job];
 }

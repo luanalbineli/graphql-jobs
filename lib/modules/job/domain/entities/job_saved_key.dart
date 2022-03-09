@@ -1,6 +1,6 @@
-import 'dart:ui';
+import 'package:equatable/equatable.dart';
 
-class JobSavedKey {
+class JobSavedKey extends Equatable {
   final String jobSlug;
   final String companySlug;
 
@@ -10,11 +10,5 @@ class JobSavedKey {
   });
 
   @override
-  bool operator ==(Object other) =>
-      other is JobSavedKey &&
-      jobSlug == other.jobSlug &&
-      companySlug == other.companySlug;
-
-  @override
-  int get hashCode => hashValues(jobSlug, companySlug);
+  List<Object?> get props => [jobSlug, companySlug];
 }
