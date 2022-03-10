@@ -1,8 +1,8 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:graphql_jobs/graphql/api.graphql.dart';
-import 'package:graphql_jobs/modules/job/data/models/job_favorite_key_model.dart';
 import 'package:graphql_jobs/modules/job/data/models/job_model.dart';
 import 'package:graphql_jobs/modules/job/data/models/job_saved_model.dart';
+import 'package:graphql_jobs/modules/job/data/models/saved_job_model.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class JobRemoteDataSource {
@@ -10,7 +10,7 @@ abstract class JobRemoteDataSource {
 
   Future<List<JobModel>> getJobList();
 
-  Future<JobSavedModel> getJobSaved(JobSavedKeyModel jobSavedKeyModel);
+  Future<SavedJobModel> getSavedJob(SavedJobKeyModel jobSavedKeyModel);
 }
 
 @Injectable(as: JobRemoteDataSource)
@@ -38,7 +38,7 @@ class JobRemoteDataSourceImpl extends JobRemoteDataSource {
   }
 
   @override
-  Future<JobSavedModel> getJobSaved(JobSavedKeyModel jobSavedKeyModel) async {
+  Future<SavedJobModel> getSavedJob(SavedJobKeyModel jobSavedKeyModel) async {
     final query = JobQuery(
       variables: JobArguments(
         input: JobInput(
@@ -62,6 +62,6 @@ class JobRemoteDataSourceImpl extends JobRemoteDataSource {
 
     final parsedData = query.parse(queryResult.data!);
     final jobModel = JobModel.fromJson(parsedData.job.toJson());
-    return JobSavedModel(jobModel: jobModel);
+    return SavedJobModel(jobModel: jobModel);
   }
 }

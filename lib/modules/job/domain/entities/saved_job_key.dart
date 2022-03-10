@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-class JobSavedKey extends Equatable {
+class SavedJobKey extends Equatable {
   final String jobSlug;
   final String companySlug;
 
-  const JobSavedKey({
+  const SavedJobKey({
     required this.jobSlug,
     required this.companySlug,
   });

@@ -3,8 +3,8 @@ import 'package:graphql_jobs/constants/app_constants.dart';
 import 'package:graphql_jobs/modules/core/domain/use_case/use_case.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job_filter_type.dart';
-import 'package:graphql_jobs/modules/job/domain/entities/job_saved_key.dart';
-import 'package:graphql_jobs/modules/job/domain/entities/job_savedd.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/saved_job.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/saved_job_key.dart';
 import 'package:graphql_jobs/modules/job/domain/repositories/job_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -30,7 +30,7 @@ class GetJobListUseCaseImpl extends GetJobListUseCase {
     return _getSavedJobInfo(savedJobKeyList);
   }
 
-  List<Job> _mapJobList(List<Job> jobList, List<JobSavedKey> savedJobKeyList) {
+  List<Job> _mapJobList(List<Job> jobList, List<SavedJobKey> savedJobKeyList) {
     return jobList.map((job) {
       final jobSavedKey = job.getJobSavedKey();
       final savedKeyIndex = savedJobKeyList.indexWhere(
@@ -40,14 +40,14 @@ class GetJobListUseCaseImpl extends GetJobListUseCase {
       );
 
       if (savedKeyIndex != AppConstants.indexNotFound) {
-        return JobSaved(job: job);
+        return SavedJob(job: job);
       }
 
       return job;
     }).toList(growable: false);
   }
 
-  Future<List<Job>> _getSavedJobInfo(List<JobSavedKey> savedJobKeyList) async {
+  Future<List<Job>> _getSavedJobInfo(List<SavedJobKey> savedJobKeyList) async {
     return Future.wait(
       savedJobKeyList
           .map((savedJobKey) => _jobRepository.getSavedJob(savedJobKey))

@@ -1,9 +1,9 @@
 import 'package:graphql_jobs/modules/job/data/data_sources/job_local_data_source.dart';
 import 'package:graphql_jobs/modules/job/data/data_sources/job_remote_data_source.dart';
-import 'package:graphql_jobs/modules/job/data/models/job_favorite_key_model.dart';
+import 'package:graphql_jobs/modules/job/data/models/saved_job_model.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
-import 'package:graphql_jobs/modules/job/domain/entities/job_saved_key.dart';
-import 'package:graphql_jobs/modules/job/domain/entities/job_savedd.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/saved_job.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/saved_job_key.dart';
 import 'package:graphql_jobs/modules/job/domain/repositories/job_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -21,31 +21,31 @@ class JobRepositoryImpl extends JobRepository {
   Future<List<Job>> getJobList() => _jobRemoteDataSource.getJobList();
 
   @override
-  List<JobSavedKey> getJobSavedKeyList() =>
+  List<SavedJobKey> getJobSavedKeyList() =>
       _jobLocalDataSource.getSavedJobKeyList();
 
   @override
-  Future<void> addSavedJob(JobSavedKey jobSavedKey) =>
+  Future<void> addSavedJob(SavedJobKey jobSavedKey) =>
       _jobLocalDataSource.addSavedJob(
-        JobSavedKeyModel(
+        SavedJobKeyModel(
           jobSlug: jobSavedKey.jobSlug,
           companySlug: jobSavedKey.companySlug,
         ),
       );
 
   @override
-  Future<void> removeSavedJob(JobSavedKey jobSavedKey) =>
+  Future<void> removeSavedJob(SavedJobKey jobSavedKey) =>
       _jobLocalDataSource.removeSavedJob(
-        JobSavedKeyModel(
+        SavedJobKeyModel(
           jobSlug: jobSavedKey.jobSlug,
           companySlug: jobSavedKey.companySlug,
         ),
       );
 
   @override
-  Future<JobSaved> getSavedJob(JobSavedKey jobSavedKey) =>
-      _jobRemoteDataSource.getJobSaved(
-        JobSavedKeyModel(
+  Future<SavedJob> getSavedJob(SavedJobKey jobSavedKey) =>
+      _jobRemoteDataSource.getSavedJob(
+        SavedJobKeyModel(
           jobSlug: jobSavedKey.jobSlug,
           companySlug: jobSavedKey.companySlug,
         ),

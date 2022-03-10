@@ -1,7 +1,7 @@
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
 
-class JobSaved extends Job {
-  JobSaved({required Job job})
+class SavedJob extends Job {
+  SavedJob({required Job job})
       : super(
           title: job.title,
           applyUrl: job.applyUrl,

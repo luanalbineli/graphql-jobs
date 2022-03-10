@@ -5,7 +5,7 @@ import 'package:graphql_jobs/constants/app_colors.dart';
 import 'package:graphql_jobs/constants/app_dimens.dart';
 import 'package:graphql_jobs/extensions/stateless_widget_extensions.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
-import 'package:graphql_jobs/modules/job/domain/entities/job_savedd.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/saved_job.dart';
 import 'package:graphql_jobs/modules/job/presentation/bloc/save_job_bloc.dart';
 
 class SaveJobButton extends StatelessWidget {
@@ -25,7 +25,7 @@ class SaveJobButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isJobSaved = _job is JobSaved;
+    final isJobSaved = _job is SavedJob;
 
     final icon = isJobSaved ? Icons.bookmark_added : Icons.bookmark_add;
     final iconColor = isJobSaved ? activeColor : inactiveColor;
@@ -48,12 +48,12 @@ class SaveJobButton extends StatelessWidget {
     final appLocalizations = AppLocalizations.of(context)!;
     String? snackBarMessage;
     if (state is SaveJobStateChange) {
-      final isJobSaved = state.job is JobSaved;
+      final isJobSaved = state.job is SavedJob;
       snackBarMessage = isJobSaved
           ? appLocalizations.jobAddedSavedListSuccessMessage
           : appLocalizations.jobRemovedSavedListSuccessMessage;
     } else if (state is SaveJobStateError) {
-      final isJobSaved = state.job is JobSaved;
+      final isJobSaved = state.job is SavedJob;
       snackBarMessage = isJobSaved
           ? appLocalizations.jobInSavedListErrorMessage
           : appLocalizations.jobOutSavedListErrorMessage;

@@ -1,17 +1,17 @@
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
-import 'package:graphql_jobs/modules/job/domain/entities/job_saved_key.dart';
-import 'package:graphql_jobs/modules/job/domain/entities/job_savedd.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/saved_job.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/saved_job_key.dart';
 
 abstract class JobRepository {
   const JobRepository();
 
   Future<List<Job>> getJobList();
 
-  List<JobSavedKey> getJobSavedKeyList();
+  List<SavedJobKey> getJobSavedKeyList();
 
-  Future<void> removeSavedJob(JobSavedKey jobSavedKey);
+  Future<void> removeSavedJob(SavedJobKey jobSavedKey);
 
-  Future<void> addSavedJob(JobSavedKey jobSavedKey);
+  Future<void> addSavedJob(SavedJobKey jobSavedKey);
 
-  Future<JobSaved> getSavedJob(JobSavedKey jobSavedKey);
+  Future<SavedJob> getSavedJob(SavedJobKey jobSavedKey);
 }

@@ -2,7 +2,7 @@ import 'package:faker/faker.dart' as faker;
 import 'package:graphql_jobs/modules/core/domain/use_case/use_case_result.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job.dart';
 import 'package:graphql_jobs/modules/job/domain/entities/job_filter_type.dart';
-import 'package:graphql_jobs/modules/job/domain/entities/job_savedd.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/saved_job.dart';
 import 'package:graphql_jobs/modules/job/domain/use_cases/get_job_list_use_case.dart';
 import 'package:graphql_jobs/modules/job/domain/use_cases/update_job_list_use_case.dart';
 import 'package:graphql_jobs/modules/job/presentation/bloc/job_list_bloc.dart';
@@ -92,7 +92,7 @@ void main() {
     bloc.add(const JobListEventInit(jobFilterType: jobFilterType));
 
     final jobToUpdate = expectedJobList[1];
-    final updatedJob = JobSaved(job: jobToUpdate);
+    final updatedJob = SavedJob(job: jobToUpdate);
 
     final expectedUpdatedJobList = [
       expectedJobList[0],

@@ -1,18 +1,18 @@
 import 'dart:convert';
 
 import 'package:graphql_jobs/extensions/string_extensions.dart';
-import 'package:graphql_jobs/modules/job/data/models/job_favorite_key_model.dart';
+import 'package:graphql_jobs/modules/job/data/models/saved_job_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class JobLocalDataSource {
   const JobLocalDataSource();
 
-  List<JobSavedKeyModel> getSavedJobKeyList();
+  List<SavedJobKeyModel> getSavedJobKeyList();
 
-  Future<void> removeSavedJob(JobSavedKeyModel jobSavedKey);
+  Future<void> removeSavedJob(SavedJobKeyModel jobSavedKey);
 
-  Future<void> addSavedJob(JobSavedKeyModel jobSavedKey);
+  Future<void> addSavedJob(SavedJobKeyModel jobSavedKey);
 }
 
 @Injectable(as: JobLocalDataSource)
@@ -22,7 +22,7 @@ class JobLocalDataSourceImpl extends JobLocalDataSource {
   const JobLocalDataSourceImpl(this._sharedPreferences);
 
   @override
-  List<JobSavedKeyModel> getSavedJobKeyList() {
+  List<SavedJobKeyModel> getSavedJobKeyList() {
     if (!_sharedPreferences.containsKey(_savedJobKeyListKey)) {
       return [];
     }
@@ -32,14 +32,14 @@ class JobLocalDataSourceImpl extends JobLocalDataSource {
 
     final dynamicList = json.decode(rawJSONList!) as List<dynamic>;
     return dynamicList
-        .map((map) => JobSavedKeyModel.fromJson(map as Map<String, dynamic>))
+        .map((map) => SavedJobKeyModel.fromJson(map as Map<String, dynamic>))
         .toList();
   }
 
   static const String _savedJobKeyListKey = 'favorite_job_list';
 
   @override
-  Future<void> addSavedJob(JobSavedKeyModel jobSavedKey) {
+  Future<void> addSavedJob(SavedJobKeyModel jobSavedKey) {
     final savedJobKeyList = getSavedJobKeyList();
     savedJobKeyList.add(jobSavedKey);
 
@@ -47,14 +47,14 @@ class JobLocalDataSourceImpl extends JobLocalDataSource {
   }
 
   @override
-  Future<void> removeSavedJob(JobSavedKeyModel jobSavedKey) {
+  Future<void> removeSavedJob(SavedJobKeyModel jobSavedKey) {
     final savedJobKeyList = getSavedJobKeyList();
     savedJobKeyList.remove(jobSavedKey);
 
     return _saveJobKeyList(savedJobKeyList);
   }
 
-  Future<void> _saveJobKeyList(List<JobSavedKeyModel> jobSavedKeyList) {
+  Future<void> _saveJobKeyList(List<SavedJobKeyModel> jobSavedKeyList) {
     final jsonList = json.encode(
       jobSavedKeyList
           .map((element) => element.toJson())

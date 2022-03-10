@@ -1,7 +1,7 @@
 import 'package:faker/faker.dart' as faker;
 import 'package:graphql_jobs/modules/job/domain/entities/job_filter_type.dart';
-import 'package:graphql_jobs/modules/job/domain/entities/job_saved_key.dart';
-import 'package:graphql_jobs/modules/job/domain/entities/job_savedd.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/saved_job.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/saved_job_key.dart';
 import 'package:graphql_jobs/modules/job/domain/repositories/job_repository.dart';
 import 'package:graphql_jobs/modules/job/domain/use_cases/get_job_list_use_case.dart';
 import 'package:mocktail/mocktail.dart';
@@ -21,7 +21,7 @@ void main() {
     _getJobListUseCase = GetJobListUseCaseImpl(_jobRepository);
 
     registerFallbackValue(
-      JobSavedKey(
+      SavedJobKey(
         jobSlug: faker.faker.randomGenerator.string(10),
         companySlug: faker.faker.randomGenerator.string(10),
       ),
@@ -69,7 +69,7 @@ void main() {
       result.data,
       [
         jobList[0],
-        JobSaved(
+        SavedJob(
           job: jobList[savedJobIndex],
         )
       ],
@@ -113,7 +113,7 @@ void main() {
 
   test('Saved filter with saved jobs test', () async {
     final savedJobList =
-        faker.faker.getJobList(5).map((job) => JobSaved(job: job)).toList();
+        faker.faker.getJobList(5).map((job) => SavedJob(job: job)).toList();
 
     final savedJobKeyList =
         savedJobList.map((job) => job.getJobSavedKey()).toList();

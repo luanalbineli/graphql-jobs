@@ -1,6 +1,6 @@
 import 'package:graphql_jobs/modules/job/data/models/job_model.dart';
-import 'package:graphql_jobs/modules/job/domain/entities/job_savedd.dart';
+import 'package:graphql_jobs/modules/job/domain/entities/saved_job.dart';
 
-class JobSavedModel extends JobSaved {
-  JobSavedModel({required JobModel jobModel}) : super(job: jobModel);
+class SavedJobModel extends SavedJob {
+  SavedJobModel({required JobModel jobModel}) : super(job: jobModel);
 }
