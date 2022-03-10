@@ -7,14 +7,15 @@ This is a small Flutter application, developed to consume the public GraphQL API
 
  - Job list screen;
  - Job detail screen;
- - Option to save jobs for later (under development);
- - Saved jobs list screen (under development);
+ - Option to save jobs for later;
+ - Saved jobs list screen.
 
 ## Principles and architecture
 - SOLID
 - Clean Architecture
 
 ## Libs
+- **artemis**: translate GraphQL schemas/queries to dart objects.
 - **auto_route**: build a layer over the native routing system. It makes things easier and safer to transfer data between screens, with the auto generated code.
 - **cached_network_image**: cache in-memory/disk network images. In-memory in this case.
 - **flutter_bloc**: state management. IMO similar to Redux.
